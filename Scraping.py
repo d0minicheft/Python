@@ -19,5 +19,6 @@ def scrape_data(url):
         return None
 
     # A függvény meghívása legvégül, 0 behúzással:
-    eredmeny = scrape_data("https://en.wikipedia.org/wiki/Wikipedia:Size_of_Wikipedia")
-    print(eredmeny)
+    data_all = scrape_data("https://en.wikipedia.org/wiki/Wikipedia:Size_of_Wikipedia")
+    print(data_all)
+
