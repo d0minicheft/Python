@@ -1,0 +1,23 @@
+import pandas as pd
+import requests
+from io import StringIO
+
+def scrape_data(url):
+    print("Data scraping started...", url)
+    # A Wikipédia megköveteli a User-Agent megadását
+    headers = {"User-Agent: Mozilla/5.0"}
+    # Küldj egy GET kérést a Wikipédia oldalára
+    response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+    # A 200 HTTP státuszkód azt jelenti, hogy a kérés sikeres volt.
+    if response.status_code == 200:
+        # HTML táblázatok beolvasása Pandas segítségével
+        tables = pd.read.html(StringIO(response.text))
+        print(f"Sikeresen beolvasva {len(tables)} táblázat.")
+        return tables
+    else:
+        print(f"Hiba történt a kérés során. HTTP státuszkód: {response.statuse_code}")
+        return None
+
+    # A függvény meghívása legvégül, 0 behúzással:
+    eredmeny = scrape_data("https://en.wikipedia.org/wiki/Wikipedia:Size_of_Wikipedia")
+    print(eredmeny)
